@@ -1,9 +1,12 @@
 package com.janakivivrekar.electrictime;
 
+import java.io.Serializable;
+
 /**
  * Enumerates forms of personal electric transport.
  * */
-public enum ElectricTransport {
+public enum ElectricTransport implements Serializable {
+    NoPreference("No Preference", 0, Double.MAX_VALUE),
     Walking("Walking", 3.1, 30),
     BoostedMiniSBoard("Boosted Mini S Board", 18, 7),
     EvolveSkateboard("Evolve Skateboard", 26, 31),
@@ -44,5 +47,10 @@ public enum ElectricTransport {
 
     public boolean inRange(double distance) {
         return distance <= this.range;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

@@ -60,15 +60,17 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(name, input);
     }
 
-
+    /** Listens to focus changes in edit text fields and triggers up. */
     private OnFocusChangeListener editTextOnFocusChangeListener =  new OnFocusChangeListener() {
         public void onFocusChange(View v, boolean hasFocus) {
             // When focus is lost check that the text field has valid values
-            if (!hasFocus) { validateText(); }
+            if (!hasFocus) { checkEnteredTextAndUpdateNextButton(); }
         }
     };
 
-    private void validateText() {
+    /** Checks enter_distance and enter_time EditText fields. If both fields are empty, then the
+     *  next button is disabled. Else if either field is non-empty the next button is enabled. */
+    private void checkEnteredTextAndUpdateNextButton() {
         EditText enter_distance = findViewById(R.id.enter_distance);
         EditText enter_time = findViewById(R.id.enter_time);
         Button next_button = findViewById(R.id.main_next_button);
@@ -78,5 +80,4 @@ public class MainActivity extends AppCompatActivity {
             next_button.setEnabled(true);
         }
     }
-
 }
