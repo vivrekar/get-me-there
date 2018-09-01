@@ -1,0 +1,15 @@
+<resources>
+    <!-- Main Activity (Screen 1: Select Distance and Time)-->
+    <string name="app_name">ElectricTime</string>
+    <string name="main_header">Plan a Trip</string>
+    <string name="prompt_distance">Do you have a fixed distance to travel?</string>
+    <string name="prompt_time">Do you have a limited amount of time?</string>
+    <string name="enter_distance">Enter distance to travel (miles)</string>
+    <string name="enter_time">Enter travel time (hours)</string>
+    <string name="next_button">Next</string>
+
+    <!-- Select Transport Activity (Screen 2: Select Transport)-->
+    <string name="select_transport_header">Pick your Transport</string>
+    <string name="prompt_transport">What mode of transport do you prefer? Don\'t worry, you can always change your mind.</string>
+
+</resources>
