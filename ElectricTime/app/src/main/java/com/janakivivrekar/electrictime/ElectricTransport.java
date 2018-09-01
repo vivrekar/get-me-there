@@ -46,7 +46,7 @@ public enum ElectricTransport implements Serializable {
     }
 
     public boolean inRange(double distance) {
-        return distance <= this.range;
+        return distance <= this.getRange();
     }
 
     @Override

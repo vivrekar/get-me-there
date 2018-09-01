@@ -45,6 +45,8 @@ public class SelectTransportActivity extends AppCompatActivity {
         Intent viewResultsActivityIntent = new Intent(this, ViewResultsActivity.class);
         Spinner select_transport = findViewById(R.id.select_transport);
         ElectricTransport selectedElectricTransport = (ElectricTransport) select_transport.getSelectedItem();
+        // Remove selected transport from inRangeElectricTransports list to avoid repetition
+        this.inRangeElectricTransports.remove(selectedElectricTransport);
         // Send selected transport to next intent
         viewResultsActivityIntent.putExtra(SELECTED_TRANSPORT, selectedElectricTransport);
         // Send in-range transports to next intent

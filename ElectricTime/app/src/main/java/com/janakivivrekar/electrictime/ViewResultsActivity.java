@@ -30,4 +30,12 @@ public class ViewResultsActivity extends AppCompatActivity {
         }
 
     }
+
+    private Double convertDistanceToTime(Double distance, ElectricTransport electricTransport) {
+        return distance / electricTransport.getSpeed();
+    }
+
+    private Double convertTimeToDistance(Double time, ElectricTransport electricTransport) {
+        return time * electricTransport.getSpeed();
+    }
 }
