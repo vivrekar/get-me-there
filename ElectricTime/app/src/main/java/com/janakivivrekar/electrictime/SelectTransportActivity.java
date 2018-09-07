@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
-
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.getInRangeElectricTransports;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.DISTANCE;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.TIME;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.SELECTED_TRANSPORT;
+
 
 public class SelectTransportActivity extends AppCompatActivity {
-    public static final String SELECTED_TRANSPORT = "com.janakivivrekar.electrictime.selected_transport";
     double distance;
     double time;
     @Override
@@ -21,8 +22,8 @@ public class SelectTransportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_transport);
         // Get the Intent that started this activity and extract the user's inputted distance
         Intent intent = getIntent();
-        this.distance = intent.getDoubleExtra(MainActivity.DISTANCE, 0.00);
-        this.time = intent.getDoubleExtra(MainActivity.TIME, Double.MAX_VALUE);
+        this.distance = intent.getDoubleExtra(DISTANCE, 0.00);
+        this.time = intent.getDoubleExtra(TIME, Double.MAX_VALUE);
 
         Spinner select_transport = findViewById(R.id.select_transport);
 
@@ -44,8 +45,8 @@ public class SelectTransportActivity extends AppCompatActivity {
         Spinner select_transport = findViewById(R.id.select_transport);
         ElectricTransport selectedElectricTransport = (ElectricTransport) select_transport.getSelectedItem();
         // Send time, distance, and selected transport to next intent
-        viewResultsActivityIntent.putExtra(MainActivity.DISTANCE, this.distance);
-        viewResultsActivityIntent.putExtra(MainActivity.TIME, this.time);
+        viewResultsActivityIntent.putExtra(DISTANCE, this.distance);
+        viewResultsActivityIntent.putExtra(TIME, this.time);
         viewResultsActivityIntent.putExtra(SELECTED_TRANSPORT, selectedElectricTransport);
         startActivity(viewResultsActivityIntent); // Go to next screen
     }

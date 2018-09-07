@@ -1,11 +1,16 @@
 package com.janakivivrekar.electrictime;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.DISTANCE;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.TIME;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.SELECTED_TRANSPORT;
 
 
 public class ViewResultsActivity extends AppCompatActivity {
@@ -16,7 +21,6 @@ public class ViewResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
-
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 
@@ -27,21 +31,23 @@ public class ViewResultsActivity extends AppCompatActivity {
         }
     }
 
+    /*TODO: create new titles*/
+
     protected Fragment createFragment() {
         Intent intent = getIntent();
 
         Bundle args = new Bundle();
         args.putDouble(
-                MainActivity.DISTANCE,
-                intent.getDoubleExtra(MainActivity.DISTANCE, 0.00)
+                DISTANCE,
+                intent.getDoubleExtra(DISTANCE, 0.00)
         );
         args.putDouble(
-                MainActivity.TIME,
-                intent.getDoubleExtra(MainActivity.TIME, Double.MAX_VALUE)
+                TIME,
+                intent.getDoubleExtra(TIME, Double.MAX_VALUE)
         );
         args.putSerializable(
-                SelectTransportActivity.SELECTED_TRANSPORT,
-                intent.getSerializableExtra(SelectTransportActivity.SELECTED_TRANSPORT)
+                SELECTED_TRANSPORT,
+                intent.getSerializableExtra(SELECTED_TRANSPORT)
         );
 
         ResultsListViewFragment resultsListViewFragment = new ResultsListViewFragment();

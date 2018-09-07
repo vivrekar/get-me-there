@@ -1,6 +1,8 @@
 package com.janakivivrekar.electrictime;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import java.io.Serializable;
 
@@ -11,17 +13,17 @@ import static com.janakivivrekar.electrictime.ElectricTransportUtils.Time;
  * Enumerates forms of personal electric transport.
  * */
 public enum ElectricTransport implements Serializable {
-    NoPreference("No Preference", 0, Double.MAX_VALUE),
-    Walking("Walking", 3.1, 30),
-    BoostedMiniSBoard("Boosted Mini S Board", 18, 7),
-    EvolveSkateboard("Evolve Skateboard", 26, 31),
-    OneWheel("OneWheel", 19, 7),
-    MotoTecSkateboard("MotoTec Skateboard", 22, 10),
-    SegwayNinebotOneS1("Segway Ninebot One S1", 12.5, 15),
-    SegwayI2SE("Segway i2 SE", 12.5, 24),
-    RazorScooter("Razor Scooter", 10, 7),
-    GeoBlade500("GeoBlade 500", 15, 8),
-    HovertraxHoverboard("Hovertrax Hoverboard", 8, 8);
+    NoPreference("No Preference", 0, Double.MAX_VALUE, R.drawable.walking),
+    Walking("Walking", 3.1, 30, R.drawable.walking),
+    BoostedMiniSBoard("Boosted Mini S Board", 18, 7, R.drawable.boosted_mini_s_board),
+    EvolveSkateboard("Evolve Skateboard", 26, 31, R.drawable.evolve_skateboard),
+    OneWheel("OneWheel", 19, 7, R.drawable.onewheel),
+    MotoTecSkateboard("MotoTec Skateboard", 22, 10, R.drawable.mototec_skateboard),
+    SegwayNinebotOneS1("Segway Ninebot One S1", 12.5, 15, R.drawable.segway_ninebot_one_s1),
+    SegwayI2SE("Segway i2 SE", 12.5, 24, R.drawable.segway_i2_se),
+    RazorScooter("Razor Scooter", 10, 7, R.drawable.razor_scooter),
+    GeoBlade500("GeoBlade 500", 15, 8, R.drawable.geoblade_500),
+    HovertraxHoverboard("Hovertrax Hoverboard", 8, 8, R.drawable.hovertrax_hoverboard);
 
     /** Name of mode of transport. */
     private String name;
@@ -32,10 +34,15 @@ public enum ElectricTransport implements Serializable {
     /** Distance range of transport in miles. */
     double range;
 
-    ElectricTransport(String name, double speed, double range) {
+    /** Drawable image of transport. */
+    int drawable;
+
+    ElectricTransport(String name, double speed, double range, int drawable) {
         this.name = name;
         this.speed = speed;
         this.range = range;
+        this.drawable = drawable;
+
     }
 
     public String getName() {
@@ -54,10 +61,9 @@ public enum ElectricTransport implements Serializable {
         return distance <= this.getRange();
     }
 
-
-    /*TODO*/
-    public Bitmap getImage() {
-        return null;
+    /* TODO: add padding to image views */
+    public int getDrawable() {
+        return this.drawable;
     }
 
     private Time convertDistanceToTime(double distance) {

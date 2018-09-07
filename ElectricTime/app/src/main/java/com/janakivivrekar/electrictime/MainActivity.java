@@ -9,9 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.DISTANCE;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.TIME;
+
 public class MainActivity extends AppCompatActivity {
-    public static final String DISTANCE = "com.janakivivrekar.electrictime.distance";
-    public static final String TIME = "com.janakivivrekar.electrictime.time";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

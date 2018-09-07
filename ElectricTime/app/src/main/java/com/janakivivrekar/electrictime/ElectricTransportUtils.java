@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 class ElectricTransportUtils {
+    public static final String DISTANCE = "com.janakivivrekar.electrictime.distance";
+    public static final String TIME = "com.janakivivrekar.electrictime.time";
+    public static final String SELECTED_TRANSPORT = "com.janakivivrekar.electrictime.selected_transport";
+
     /** Create a list of modes of electric transport that are in range. */
     static ArrayList<ElectricTransport> getInRangeElectricTransports(double distance) {
         ArrayList<ElectricTransport> inRangeElectricTransports = new ArrayList<>();
@@ -15,12 +19,14 @@ class ElectricTransportUtils {
         return inRangeElectricTransports;
     }
 
+    /** Compare two ElectricTransport objects based on speed. */
     static class ElectricTransportComparator implements Comparator<ElectricTransport> {
         public int compare(ElectricTransport et1, ElectricTransport et2) {
             return et2.getSpeed().compareTo(et1.getSpeed());
         }
     }
 
+    /** Represent time in hours and minute. */
     static class Time {
         int hours;
         int minutes;

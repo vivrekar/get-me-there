@@ -1,5 +1,8 @@
 package com.janakivivrekar.electrictime;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,9 +18,9 @@ import java.util.Collections;
 
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.ElectricTransportComparator;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.getInRangeElectricTransports;
-import static com.janakivivrekar.electrictime.MainActivity.DISTANCE;
-import static com.janakivivrekar.electrictime.MainActivity.TIME;
-import static com.janakivivrekar.electrictime.SelectTransportActivity.SELECTED_TRANSPORT;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.DISTANCE;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.TIME;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.SELECTED_TRANSPORT;
 
 public class ResultsListViewFragment extends ListFragment {
 
@@ -68,11 +71,10 @@ public class ResultsListViewFragment extends ListFragment {
             );
 
             // Set image
-            /*
             ImageView electricTransportImage = convertView.findViewById(R.id.electric_transport_image);
-            if (electricTransport.getImage() != null) {
-                electricTransportImage.setImageBitmap(electricTransport.getImage());
-            } */
+            //if (electricTransportImage != null) {
+            electricTransportImage.setImageResource(electricTransport.getDrawable());
+            //}
             return convertView;
         }
     }
