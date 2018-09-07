@@ -23,7 +23,7 @@ public class SelectTransportActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.distance = intent.getDoubleExtra(MainActivity.DISTANCE, 0.00);
         this.time = intent.getDoubleExtra(MainActivity.TIME, Double.MAX_VALUE);
-        System.out.println("distance in SelectTransportActivity: " + Double.toString(this.distance));
+
         Spinner select_transport = findViewById(R.id.select_transport);
 
         // Create an ArrayAdapter using the array of electric transports and a default spinner layout

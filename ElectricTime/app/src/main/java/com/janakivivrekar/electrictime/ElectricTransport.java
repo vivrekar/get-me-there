@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 
 import java.io.Serializable;
 
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.Time;
+
+
 /**
  * Enumerates forms of personal electric transport.
  * */
@@ -51,14 +54,22 @@ public enum ElectricTransport implements Serializable {
         return distance <= this.getRange();
     }
 
-    /*TODO*/
-    public String getText() {
-        return "";
-    }
 
     /*TODO*/
     public Bitmap getImage() {
         return null;
+    }
+
+    public Time convertDistanceToTime(double distance) {
+        double totalTime = distance / this.getSpeed();
+        int hours = (int) totalTime;
+        int minutes = (int) (totalTime * 60) % 60;
+
+        return new Time(hours, minutes);
+    }
+
+    public double convertTimeToDistance(double time) {
+        return time * this.getSpeed();
     }
 
     @Override

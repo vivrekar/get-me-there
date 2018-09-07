@@ -21,4 +21,23 @@ class ElectricTransportUtils {
         }
     }
 
+    static class Time {
+        int hours;
+        int minutes;
+
+        Time(int hours, int minutes) {
+            this.hours = hours;
+            this.minutes = minutes;
+        }
+
+        @Override
+        public String toString() {
+            if (this.hours == 0) {
+                return Integer.toString(this.minutes) + " min";
+            } else {
+                return Integer.toString(this.hours) + " hr " + Integer.toString(this.minutes) + " min";
+            }
+        }
+    }
+
 }
