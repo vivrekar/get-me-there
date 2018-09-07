@@ -12,4 +12,7 @@
     <string name="select_transport_header">Pick your Transport</string>
     <string name="prompt_transport">What mode of transport do you prefer? Don\'t worry, you can always change your mind.</string>
 
+    <!-- View Results Activity (Screen 3: View Results)-->
+    <string name="view_results_header">View Results</string>
+
 </resources>

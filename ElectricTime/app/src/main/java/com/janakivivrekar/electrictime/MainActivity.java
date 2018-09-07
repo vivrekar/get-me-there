@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         boolean valid_distance = !TextUtils.isEmpty(enter_distance.getText());
         boolean valid_time = !TextUtils.isEmpty(enter_time.getText());
 
+        /* TODO: if no vehicles in range then go to a screen that says that */
+
         if (valid_distance && valid_time) {
             sendDoubleEditTextInputToIntent(DISTANCE, enter_distance, viewResultsActivityIntent);
             sendDoubleEditTextInputToIntent(TIME, enter_time, viewResultsActivityIntent);
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** Extract user inputted double from EditText field and send to specified intent.*/
     private void sendDoubleEditTextInputToIntent(String name, EditText entered_input, Intent intent) {
-        Double input = Double.parseDouble(entered_input.getText().toString());
+        double input = Double.parseDouble(entered_input.getText().toString());
         intent.putExtra(name, input);
     }
 

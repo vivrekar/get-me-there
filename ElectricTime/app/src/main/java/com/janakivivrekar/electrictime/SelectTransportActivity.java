@@ -9,30 +9,28 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.getInRangeElectricTransports;
+
 public class SelectTransportActivity extends AppCompatActivity {
     public static final String SELECTED_TRANSPORT = "com.janakivivrekar.electrictime.selected_transport";
-    public static final String IN_RANGE_TRANSPORTS_BUNDLE = "com.janakivivrekar.electrictime.in_range_transports_bundle";
-    public static final String IN_RANGE_TRANSPORTS_LIST = "com.janakivivrekar.electrictime.in_range_transports_list";
-    private ArrayList<ElectricTransport> inRangeElectricTransports;
-
+    double distance;
+    double time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_transport);
         // Get the Intent that started this activity and extract the user's inputted distance
         Intent intent = getIntent();
-        Double distance = intent.getDoubleExtra(MainActivity.DISTANCE, 0.00);
-
-        // Get a list of modes of electric transport that are in range
-        this.inRangeElectricTransports = getInRangeElectricTransports(distance);
-
+        this.distance = intent.getDoubleExtra(MainActivity.DISTANCE, 0.00);
+        this.time = intent.getDoubleExtra(MainActivity.TIME, Double.MAX_VALUE);
+        System.out.println("distance in SelectTransportActivity: " + Double.toString(this.distance));
         Spinner select_transport = findViewById(R.id.select_transport);
 
         // Create an ArrayAdapter using the array of electric transports and a default spinner layout
         ArrayAdapter<ElectricTransport> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
-                inRangeElectricTransports
+                getInRangeElectricTransports(this.distance)
         );
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -45,25 +43,11 @@ public class SelectTransportActivity extends AppCompatActivity {
         Intent viewResultsActivityIntent = new Intent(this, ViewResultsActivity.class);
         Spinner select_transport = findViewById(R.id.select_transport);
         ElectricTransport selectedElectricTransport = (ElectricTransport) select_transport.getSelectedItem();
-        // Remove selected transport from inRangeElectricTransports list to avoid repetition
-        this.inRangeElectricTransports.remove(selectedElectricTransport);
-        // Send selected transport to next intent
+        // Send time, distance, and selected transport to next intent
+        viewResultsActivityIntent.putExtra(MainActivity.DISTANCE, this.distance);
+        viewResultsActivityIntent.putExtra(MainActivity.TIME, this.time);
         viewResultsActivityIntent.putExtra(SELECTED_TRANSPORT, selectedElectricTransport);
-        // Send in-range transports to next intent
-        Bundle inRangeTransportsArgs = new Bundle();
-        inRangeTransportsArgs.putSerializable(IN_RANGE_TRANSPORTS_LIST, this.inRangeElectricTransports);
-        viewResultsActivityIntent.putExtra(IN_RANGE_TRANSPORTS_BUNDLE, inRangeTransportsArgs);
         startActivity(viewResultsActivityIntent); // Go to next screen
     }
 
-    /** Create a list of modes of electric transport that are in range. */
-    private ArrayList<ElectricTransport> getInRangeElectricTransports(Double distance) {
-        ArrayList<ElectricTransport> inRangeElectricTransports = new ArrayList<>();
-        for (ElectricTransport transport : ElectricTransport.values()) {
-            if (transport.inRange(distance)) {
-                inRangeElectricTransports.add(transport);
-            }
-        }
-        return inRangeElectricTransports;
-    }
 }

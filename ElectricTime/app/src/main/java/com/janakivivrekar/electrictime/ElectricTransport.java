@@ -1,5 +1,7 @@
 package com.janakivivrekar.electrictime;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 /**
@@ -37,7 +39,7 @@ public enum ElectricTransport implements Serializable {
         return this.name;
     }
 
-    public double getSpeed() {
+    public Double getSpeed() {
         return this.speed;
     }
 
@@ -47,6 +49,16 @@ public enum ElectricTransport implements Serializable {
 
     public boolean inRange(double distance) {
         return distance <= this.getRange();
+    }
+
+    /*TODO*/
+    public String getText() {
+        return "";
+    }
+
+    /*TODO*/
+    public Bitmap getImage() {
+        return null;
     }
 
     @Override
