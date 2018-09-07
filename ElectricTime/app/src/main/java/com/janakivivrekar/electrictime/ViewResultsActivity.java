@@ -3,11 +3,9 @@ package com.janakivivrekar.electrictime;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
 
 
 public class ViewResultsActivity extends AppCompatActivity {
@@ -49,20 +47,5 @@ public class ViewResultsActivity extends AppCompatActivity {
         ResultsListViewFragment resultsListViewFragment = new ResultsListViewFragment();
         resultsListViewFragment.setArguments(args);
         return resultsListViewFragment;
-    }
-
-    private void setElectricTransportResultView(ElectricTransport electricTransport, LinearLayout results_linear_layout) {
-        // Add electricTransportName
-        TextView electricTransportName = new TextView(this);
-        electricTransportName.setText(electricTransport.toString());
-        // Add time or distance
-        TextView electricTransportInfo = new TextView(this);
-        if (this.distance != 0.0) {
-            electricTransportInfo.setText("time: " + electricTransport.convertDistanceToTime(this.distance).toString());
-        } else {
-            electricTransportInfo.setText(String.format("distance: %.1f miles", electricTransport.convertTimeToDistance(this.time)));
-        }
-        results_linear_layout.addView(electricTransportName);
-        results_linear_layout.addView(electricTransportInfo);
     }
 }

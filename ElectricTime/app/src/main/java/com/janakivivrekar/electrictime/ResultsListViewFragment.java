@@ -28,7 +28,6 @@ public class ResultsListViewFragment extends ListFragment {
         // Unpack bundle of args
         Bundle args = getArguments();
         double distance = args.getDouble(DISTANCE);
-        double time = args.getDouble(TIME);
         ElectricTransport selectedElectricTransport = (ElectricTransport) args.getSerializable(SELECTED_TRANSPORT);
 
         ArrayList<ElectricTransport> inRangeElectricTransports =  getInRangeElectricTransports(distance);
@@ -63,7 +62,10 @@ public class ResultsListViewFragment extends ListFragment {
 
             // Set description (about time or distance)
             TextView electricTransportDescription = convertView.findViewById(R.id.electric_transport_description);
-            electricTransportDescription.setText("HELLOOOOO!!!!!");
+            Bundle args = getArguments();
+            electricTransportDescription.setText(
+                    electricTransport.getDescription(args.getDouble(DISTANCE), args.getDouble(TIME))
+            );
 
             // Set image
             /*

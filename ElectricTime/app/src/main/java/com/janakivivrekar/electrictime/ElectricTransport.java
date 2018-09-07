@@ -60,7 +60,7 @@ public enum ElectricTransport implements Serializable {
         return null;
     }
 
-    public Time convertDistanceToTime(double distance) {
+    private Time convertDistanceToTime(double distance) {
         double totalTime = distance / this.getSpeed();
         int hours = (int) totalTime;
         int minutes = (int) (totalTime * 60) % 60;
@@ -68,8 +68,16 @@ public enum ElectricTransport implements Serializable {
         return new Time(hours, minutes);
     }
 
-    public double convertTimeToDistance(double time) {
+    private double convertTimeToDistance(double time) {
         return time * this.getSpeed();
+    }
+
+    public String getDescription(double distance, double time) {
+        if (distance != 0.0) {
+            return "time: " + convertDistanceToTime(distance).toString();
+        } else {
+            return String.format("distance: %.1f miles", convertTimeToDistance(time));
+        }
     }
 
     @Override
