@@ -74,15 +74,15 @@ public enum ElectricTransport implements Serializable {
         return new Time(hours, minutes);
     }
 
-    private double convertTimeToDistance(double time) {
-        return time * this.getSpeed();
+    private double convertTimeToDistance(Time time) {
+        return time.toHours() * this.getSpeed();
     }
 
-    public String getDescription(double distance, double time) {
+    public String getDescription(double distance, Time time) {
         if (distance != 0.0) {
-            return "time: " + convertDistanceToTime(distance).toString();
+            return convertDistanceToTime(distance).toString();
         } else {
-            return String.format("distance: %.1f miles", convertTimeToDistance(time));
+            return String.format("%.1f miles", convertTimeToDistance(time));
         }
     }
 

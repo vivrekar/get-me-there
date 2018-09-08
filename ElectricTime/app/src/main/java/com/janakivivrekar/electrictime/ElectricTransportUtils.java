@@ -1,5 +1,6 @@
 package com.janakivivrekar.electrictime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -7,6 +8,7 @@ class ElectricTransportUtils {
     public static final String DISTANCE = "com.janakivivrekar.electrictime.distance";
     public static final String TIME = "com.janakivivrekar.electrictime.time";
     public static final String SELECTED_TRANSPORT = "com.janakivivrekar.electrictime.selected_transport";
+    public static final String RESULTS_DESCRIPTION = "com.janakivivrekar.electrictime.results_description";
 
     /** Create a list of modes of electric transport that are in range. */
     static ArrayList<ElectricTransport> getInRangeElectricTransports(double distance) {
@@ -27,7 +29,7 @@ class ElectricTransportUtils {
     }
 
     /** Represent time in hours and minute. */
-    static class Time {
+    static class Time implements Serializable {
         int hours;
         int minutes;
 
@@ -35,6 +37,15 @@ class ElectricTransportUtils {
             this.hours = hours;
             this.minutes = minutes;
         }
+
+        int toMinutes() {
+            return this.minutes + this.hours * 60;
+        }
+
+        double toHours() {
+            return ((double) this.toMinutes()) / 60;
+        }
+
 
         @Override
         public String toString() {

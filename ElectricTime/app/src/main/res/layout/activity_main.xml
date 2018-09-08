@@ -43,18 +43,15 @@
 
     <EditText
         android:id="@+id/enter_distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_width="251dp"
+        android:layout_height="48dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="@string/enter_distance"
         android:inputType="numberDecimal"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prompt_distance" />
 
@@ -74,21 +71,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_distance" />
 
-    <EditText
-        android:id="@+id/enter_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
-        android:ems="10"
-        android:hint="@string/enter_time"
-        android:inputType="numberDecimal"
-        android:textSize="24sp"
+    <TextView
+        android:id="@+id/miles"
+        android:layout_width="65dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="77dp"
+        android:text="miles"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/enter_distance"
+        app:layout_constraintTop_toBottomOf="@+id/prompt_distance" />
+
+    <TextView
+        android:id="@+id/minutes"
+        android:layout_width="65dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="77dp"
+        android:text="minutes"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/enter_minutes"
+        app:layout_constraintTop_toBottomOf="@+id/prompt_time" />
+
+    <TextView
+        android:id="@+id/hours"
+        android:layout_width="59dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="77dp"
+        android:text="hours"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/enter_hours"
+        app:layout_constraintTop_toBottomOf="@+id/prompt_time" />
+
+    <EditText
+        android:id="@+id/enter_hours"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="@string/enter_hours"
+        android:inputType="number"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prompt_time" />
+
+    <EditText
+        android:id="@+id/enter_minutes"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="@string/enter_minutes"
+        android:inputType="number"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/hours"
         app:layout_constraintTop_toBottomOf="@+id/prompt_time" />
 
     <Button
@@ -102,4 +148,5 @@
         android:text="@string/next_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

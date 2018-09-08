@@ -1,8 +1,5 @@
 package com.janakivivrekar.electrictime;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.Time;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.ElectricTransportComparator;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.getInRangeElectricTransports;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.DISTANCE;
@@ -34,13 +32,18 @@ public class ResultsListViewFragment extends ListFragment {
         ElectricTransport selectedElectricTransport = (ElectricTransport) args.getSerializable(SELECTED_TRANSPORT);
 
         ArrayList<ElectricTransport> inRangeElectricTransports =  getInRangeElectricTransports(distance);
-        inRangeElectricTransports.remove(selectedElectricTransport);
-        inRangeElectricTransports.remove(ElectricTransport.NoPreference);
+
+        /*TODO: if time and distance given and given time is less than that of the results, don't display */
 
         // Sort list of all in range electric transports
         Collections.sort(inRangeElectricTransports, new ElectricTransportComparator());
+        if (selectedElectricTransport != null) {
+            inRangeElectricTransports.remove(selectedElectricTransport);
+            /* TODO: special adapter for selected transport */
+            inRangeElectricTransports.add(0, selectedElectricTransport);
+        }
+        inRangeElectricTransports.remove(ElectricTransport.NoPreference);
 
-        /* TODO: special adapter for selected transport */
 
         InRangeElectricTransportAdapter adapter = new InRangeElectricTransportAdapter(inRangeElectricTransports);
         setListAdapter(adapter);
@@ -67,7 +70,7 @@ public class ResultsListViewFragment extends ListFragment {
             TextView electricTransportDescription = convertView.findViewById(R.id.electric_transport_description);
             Bundle args = getArguments();
             electricTransportDescription.setText(
-                    electricTransport.getDescription(args.getDouble(DISTANCE), args.getDouble(TIME))
+                    electricTransport.getDescription(args.getDouble(DISTANCE), (Time) args.getSerializable(TIME))
             );
 
             // Set image

@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.io.Serializable;
+
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.getInRangeElectricTransports;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.Time;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.RESULTS_DESCRIPTION;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.DISTANCE;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.TIME;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.SELECTED_TRANSPORT;
@@ -15,7 +19,8 @@ import static com.janakivivrekar.electrictime.ElectricTransportUtils.SELECTED_TR
 
 public class SelectTransportActivity extends AppCompatActivity {
     double distance;
-    double time;
+    Time time;
+    String results_description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +28,8 @@ public class SelectTransportActivity extends AppCompatActivity {
         // Get the Intent that started this activity and extract the user's inputted distance
         Intent intent = getIntent();
         this.distance = intent.getDoubleExtra(DISTANCE, 0.00);
-        this.time = intent.getDoubleExtra(TIME, Double.MAX_VALUE);
+        this.time = (Time) intent.getSerializableExtra(TIME);
+        this.results_description = intent.getStringExtra(RESULTS_DESCRIPTION);
 
         Spinner select_transport = findViewById(R.id.select_transport);
 
@@ -35,6 +41,7 @@ public class SelectTransportActivity extends AppCompatActivity {
         );
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        /*TODO: add images to dropdown*/
         // Apply the adapter to the spinner
         select_transport.setAdapter(adapter);
     }
@@ -48,6 +55,8 @@ public class SelectTransportActivity extends AppCompatActivity {
         viewResultsActivityIntent.putExtra(DISTANCE, this.distance);
         viewResultsActivityIntent.putExtra(TIME, this.time);
         viewResultsActivityIntent.putExtra(SELECTED_TRANSPORT, selectedElectricTransport);
+        viewResultsActivityIntent.putExtra(RESULTS_DESCRIPTION, this.results_description);
+
         startActivity(viewResultsActivityIntent); // Go to next screen
     }
 

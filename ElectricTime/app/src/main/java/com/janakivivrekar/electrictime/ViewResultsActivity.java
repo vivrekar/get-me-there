@@ -1,31 +1,29 @@
 package com.janakivivrekar.electrictime;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.DISTANCE;
+import static com.janakivivrekar.electrictime.ElectricTransportUtils.RESULTS_DESCRIPTION;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.TIME;
 import static com.janakivivrekar.electrictime.ElectricTransportUtils.SELECTED_TRANSPORT;
 
 
 public class ViewResultsActivity extends AppCompatActivity {
-    double distance;
-    double time;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
+        // Set results description on screen
+        ((TextView) findViewById(R.id.results_description)).setText(getIntent().getStringExtra(RESULTS_DESCRIPTION));
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 
         if (fragment == null) {
-            System.out.println("fragment is null???");
             fragment = createFragment();
             fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
         }
@@ -41,9 +39,9 @@ public class ViewResultsActivity extends AppCompatActivity {
                 DISTANCE,
                 intent.getDoubleExtra(DISTANCE, 0.00)
         );
-        args.putDouble(
+        args.putSerializable(
                 TIME,
-                intent.getDoubleExtra(TIME, Double.MAX_VALUE)
+                intent.getSerializableExtra(TIME)
         );
         args.putSerializable(
                 SELECTED_TRANSPORT,
